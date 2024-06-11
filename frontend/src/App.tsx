@@ -1,10 +1,10 @@
-import { Button } from "@mui/material"
 import "./App.css"
+import SearchBar from "./components/SearchBar"
 
 function App() {
   return (
     <div>
-      <Button variant="contained">Ssup G!</Button>
+      <SearchBar />
     </div>
   )
 }
