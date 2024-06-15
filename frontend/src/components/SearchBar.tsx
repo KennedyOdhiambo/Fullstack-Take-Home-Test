@@ -43,7 +43,7 @@ const GET_BOOKS = gql`
 `
 
 export default function SearchBar() {
-   const [selectedBooks, setSelectedBooks] = useState<Book[]>([])
+   const [selectedBooks, setSelectedBooks] = useState<{ title: string; author: string }[]>([])
    const [open, setOpen] = useState(false)
    const { data, loading, error } = useQuery<BooksQuery>(GET_BOOKS)
 
@@ -54,25 +54,24 @@ export default function SearchBar() {
       coverPhotoURL: book.coverPhotoURL,
    }))
 
-   const handleAddBook = (book: Book) => {
-      setSelectedBooks((prevList) => [...prevList, book])
+   console.log(selectedBooks)
+
+   const handleAddBook = (option: DropdownOption) => {
+      const { bookTitle, bookAuthor } = option
+      setSelectedBooks((prevList) => [...prevList, { title: bookTitle, author: bookAuthor }])
    }
 
-   const handleRemoveBook = (book: Book) => {
-      setSelectedBooks((prevList) => prevList.filter((b) => b.title !== book.title))
+   const handleRemoveBook = (option: DropdownOption) => {
+      const { bookTitle, bookAuthor } = option
+      setSelectedBooks((prevList) =>
+         prevList.filter((b) => b.title !== bookTitle || b.author !== bookAuthor)
+      )
    }
 
-   const handleOptionClick = (option: DropdownOption) => {
-      const book = books.find((b) => b.title === option.bookTitle)
-      if (book) {
-         const isSelected = selectedBooks.some((b) => b.title === book.title)
-         if (isSelected) {
-            handleRemoveBook(book)
-         } else {
-            handleAddBook(book)
-         }
-      }
-      setTimeout(() => setOpen(true), 0)
+   const isBookSelected = (option: DropdownOption) => {
+      return selectedBooks.some(
+         (b) => b.title === option.bookTitle && b.author === option.bookAuthor
+      )
    }
 
    if (loading) return <CircularProgress />
@@ -101,7 +100,13 @@ export default function SearchBar() {
                <Box
                   component="li"
                   {...props}
-                  onClick={() => handleOptionClick(option)}
+                  onClick={() => {
+                     if (isBookSelected(option)) {
+                        handleRemoveBook(option)
+                     } else {
+                        handleAddBook(option)
+                     }
+                  }}
                   display="flex"
                   justifyContent="space-between"
                   alignItems="center"
