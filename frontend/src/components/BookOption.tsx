@@ -22,16 +22,22 @@ export default function BookOption(props: BookOptionProps) {
             paddingX: '1rem',
             paddingY: '0.5rem',
             '&:hover': {
-               backgroundColor: 'rgba(0, 0, 0, 0.05)',
+               backgroundColor: '#CFFAFA',
                cursor: 'pointer',
             },
          }}
       >
          <Box display="flex" flexDirection="row" alignItems="center">
-            <Avatar src={coverPhotoURL} sx={{ marginRight: 2 }} />
+            <Avatar
+               variant="square"
+               src={coverPhotoURL}
+               sx={{ marginRight: 2, height: '4rem', width: '4rem' }}
+            />
             <Box>
-               <Typography variant="body1">{bookTitle}</Typography>
-               <Typography variant="body2" color="textSecondary">
+               <Typography variant="body1" color="#335C6E" fontWeight={500}>
+                  {bookTitle}
+               </Typography>
+               <Typography variant="body2" color="#4AA088">
                   {bookAuthor}
                </Typography>
             </Box>

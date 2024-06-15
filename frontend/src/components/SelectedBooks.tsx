@@ -12,7 +12,7 @@ export default function SelectedBooks({ books, onDeleteBook }: SelectedBooksProp
       <Grid container spacing={4}>
          {books.map((book, index) => (
             <Grid key={index} item xs={12} sm={6} md={4}>
-               <Card sx={{ position: 'relative' }}>
+               <Card sx={{ position: 'relative', backgroundColor: '#CFFAFA' }}>
                   <CardMedia
                      component={'img'}
                      alt={book.bookTitle}
@@ -31,7 +31,7 @@ export default function SelectedBooks({ books, onDeleteBook }: SelectedBooksProp
                         backgroundColor: 'rgba(255, 255, 255, 1)',
                         borderRadius: '50%',
                         '&:hover': {
-                           backgroundColor: 'rgba(255, 255, 255, 0.8)',
+                           backgroundColor: '#CFFAFA',
                            cursor: 'pointer',
                         },
                      }}
@@ -40,11 +40,11 @@ export default function SelectedBooks({ books, onDeleteBook }: SelectedBooksProp
                   </IconButton>
 
                   <CardContent sx={{ height: '5rem' }}>
-                     <Typography gutterBottom variant="h6" component={'h2'}>
+                     <Typography gutterBottom color={'#335C6E'} variant="h6" component={'h2'}>
                         {book.bookTitle}
                      </Typography>
 
-                     <Typography variant="body2" color={''} component={'p'}>
+                     <Typography variant="body2" color={'#4AA088'} component={'p'}>
                         {book.bookAuthor}
                      </Typography>
                   </CardContent>

@@ -23,13 +23,22 @@ export default function SearchBar({ isBookSelected, handleSelectBook }: SearchBa
          disablePortal
          id="book-searchbox"
          options={dropdownOptions}
-         sx={{ width: 400, mt: '2rem' }}
+         sx={{
+            width: 400,
+            mt: '2rem',
+
+            '& .MuiOutlinedInput-root': {
+               '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#5ACCCC',
+               },
+            },
+         }}
          getOptionLabel={(option) => option.bookTitle}
          getOptionKey={(option) => `${option.bookTitle} - ${option.bookAuthor}`}
          open={open}
          onOpen={() => setOpen(true)}
          onClose={() => setOpen(false)}
-         renderInput={(params) => <TextField {...params} label="Books" />}
+         renderInput={(params) => <TextField {...params} label="Books" sx={{ color: '#5ACCCC' }} />}
          renderOption={(props, option) => (
             <BookOption
                {...props}
